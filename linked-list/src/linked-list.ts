@@ -5,7 +5,7 @@ export default class LinkedList<T> {
     head: LinkedListNode<T> = null;
     tail: LinkedListNode<T> = null;
 
-    size: number = 0;
+    private _size: number = 0;
 
     constructor(value?: T) {
         this.addToHead(value);
@@ -18,7 +18,7 @@ export default class LinkedList<T> {
             const node = new LinkedListNode(value);
             this.tail = this.tail.next = node;
         }
-        this.size++;
+        this._size++;
 
         return this;
     }
@@ -50,11 +50,15 @@ export default class LinkedList<T> {
     clear() {
         this.head = null;
         this.tail = null;
-        this.size = 0;
+        this._size = 0;
     }
 
     get isEmpty(): boolean {
-        return this.size === 0;
+        return this._size === 0;
+    }
+
+    get size(): number {
+        return this._size;
     }
 
     private addToHead(value: T) {

@@ -75,7 +75,7 @@ var LinkedList = /** @class */ (function () {
     function LinkedList(value) {
         this.head = null;
         this.tail = null;
-        this.size = 0;
+        this._size = 0;
         this.addToHead(value);
     }
     LinkedList.prototype.add = function (value) {
@@ -86,7 +86,7 @@ var LinkedList = /** @class */ (function () {
             var node = new linked_list_node_1.default(value);
             this.tail = this.tail.next = node;
         }
-        this.size++;
+        this._size++;
         return this;
     };
     LinkedList.prototype.find = function (value) {
@@ -110,11 +110,18 @@ var LinkedList = /** @class */ (function () {
     LinkedList.prototype.clear = function () {
         this.head = null;
         this.tail = null;
-        this.size = 0;
+        this._size = 0;
     };
     Object.defineProperty(LinkedList.prototype, "isEmpty", {
         get: function () {
-            return this.size === 0;
+            return this._size === 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LinkedList.prototype, "size", {
+        get: function () {
+            return this._size;
         },
         enumerable: true,
         configurable: true
