@@ -1,0 +1,20 @@
+{
+  "name": "linked-list",
+  "version": "0.0.1",
+  "description": "The Linked list implementation",
+  "main": "output/index.ts",
+  "scripts": {
+    "build": "node ./node_modules/webpack/bin/webpack"
+  },
+  "keywords": [
+    "linked-list",
+    "computer-since"
+  ],
+  "author": "Aliaksandr Kokurin",
+  "devDependencies": {
+    "html-webpack-plugin": "^2.30.1",
+    "ts-loader": "^3.1.1",
+    "typescript": "^2.6.1",
+    "webpack": "^3.8.1"
+  }
+}
