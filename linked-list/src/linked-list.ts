@@ -20,6 +20,12 @@ export default class LinkedList<T> {
         this.size++;
     }
 
+    clear() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
+
     get isEmpty(): boolean {
         return this.size === 0;
     }

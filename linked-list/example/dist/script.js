@@ -88,6 +88,11 @@ var LinkedList = /** @class */ (function () {
         }
         this.size++;
     };
+    LinkedList.prototype.clear = function () {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    };
     Object.defineProperty(LinkedList.prototype, "isEmpty", {
         get: function () {
             return this.size === 0;
@@ -141,6 +146,8 @@ var linked_list_1 = __webpack_require__(0);
     linkedList.add(1);
     linkedList.add(2);
     linkedList.add(3);
+    console.log(linkedList);
+    linkedList.clear();
     console.log(linkedList);
 })();
 

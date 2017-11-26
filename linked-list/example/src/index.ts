@@ -12,4 +12,8 @@ import LinkedList from "../../src/linked-list";
 
     console.log(linkedList);
 
+    linkedList.clear();
+
+    console.log(linkedList);
+
 })();
