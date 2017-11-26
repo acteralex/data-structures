@@ -4,6 +4,7 @@ import LinkedListNode from "./linked-list-node";
 export default class LinkedList<T> {
     head: LinkedListNode<T> = null;
     tail: LinkedListNode<T> = null;
+
     size: number = 0;
 
     constructor(value?: T) {
@@ -20,6 +21,17 @@ export default class LinkedList<T> {
         this.size++;
 
         return this;
+    }
+
+    forEach(callback: (item: T, index: number) => void) {
+        let node = this.head,
+            index = 0;
+
+        while (node !== null) {
+            callback(node.value, index);
+            node = node.next;
+            index++;
+        }
     }
 
     clear() {

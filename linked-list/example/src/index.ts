@@ -6,11 +6,15 @@ import LinkedList from "../../src/linked-list";
 
     console.log(linkedList);
 
-    linkedList.add(1);
-    linkedList.add(2);
-    linkedList.add(3);
+    linkedList.add(100);
+    linkedList.add(101);
+    linkedList.add(102);
 
     console.log(linkedList);
+
+    linkedList.forEach((item: number, index: number) => {
+        console.log(index, item);
+    });
 
     linkedList.clear();
 

@@ -89,6 +89,14 @@ var LinkedList = /** @class */ (function () {
         this.size++;
         return this;
     };
+    LinkedList.prototype.forEach = function (callback) {
+        var node = this.head, index = 0;
+        while (node !== null) {
+            callback(node.value, index);
+            node = node.next;
+            index++;
+        }
+    };
     LinkedList.prototype.clear = function () {
         this.head = null;
         this.tail = null;
