@@ -89,6 +89,13 @@ var LinkedList = /** @class */ (function () {
         this._size++;
         return this;
     };
+    LinkedList.prototype.addRange = function (values) {
+        var _this = this;
+        if (values.length > 0) {
+            values.forEach(function (item) { return _this.add(item); });
+        }
+        return this;
+    };
     LinkedList.prototype.remove = function (value) {
         if (this.head.value === value) {
             this.head = this.head.next;
@@ -205,6 +212,12 @@ var linked_list_1 = __webpack_require__(0);
     console.log('Added 4 items with chain', linkedList);
     linkedList.remove(3);
     console.log('After remove', linkedList);
+    linkedList.addRange([
+        5,
+        6,
+        7,
+    ]);
+    console.log('After added range', linkedList);
 })();
 
 

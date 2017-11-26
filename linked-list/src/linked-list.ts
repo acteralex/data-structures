@@ -23,6 +23,13 @@ export default class LinkedList<T> {
         return this;
     }
 
+    addRange(values: T[]): LinkedList<T> {
+        if (values.length > 0) {
+            values.forEach(item => this.add(item));
+        }
+        return this;
+    }
+
     remove(value: T): LinkedList<T> {
         if(this.head.value === value) {
             this.head = this.head.next;

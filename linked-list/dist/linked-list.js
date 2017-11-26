@@ -89,6 +89,13 @@ var LinkedList = /** @class */ (function () {
         this._size++;
         return this;
     };
+    LinkedList.prototype.addRange = function (values) {
+        var _this = this;
+        if (values.length > 0) {
+            values.forEach(function (item) { return _this.add(item); });
+        }
+        return this;
+    };
     LinkedList.prototype.remove = function (value) {
         if (this.head.value === value) {
             this.head = this.head.next;

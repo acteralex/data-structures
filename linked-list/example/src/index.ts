@@ -36,4 +36,12 @@ import LinkedList from "../../src/linked-list";
 
     console.log('After remove', linkedList);
 
+    linkedList.addRange([
+        5,
+        6,
+        7,
+    ]);
+
+    console.log('After added range', linkedList);
+
 })();
