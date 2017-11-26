@@ -23,6 +23,19 @@ export default class LinkedList<T> {
         return this;
     }
 
+    find(value: T): LinkedListNode<T> {
+        let node = this.head;
+
+        while (node !== null) {
+            if (node.value === value) {
+                return node;
+            }
+            node = node.next;
+        }
+
+        return null;
+    }
+
     forEach(callback: (item: T, index: number) => void) {
         let node = this.head,
             index = 0;

@@ -89,6 +89,16 @@ var LinkedList = /** @class */ (function () {
         this.size++;
         return this;
     };
+    LinkedList.prototype.find = function (value) {
+        var node = this.head;
+        while (node !== null) {
+            if (node.value === value) {
+                return node;
+            }
+            node = node.next;
+        }
+        return null;
+    };
     LinkedList.prototype.forEach = function (callback) {
         var node = this.head, index = 0;
         while (node !== null) {
@@ -159,6 +169,7 @@ var linked_list_1 = __webpack_require__(0);
     linkedList.forEach(function (item, index) {
         console.log(index, item);
     });
+    console.log(linkedList.find(101));
     linkedList.clear();
     console.log(linkedList);
 })();
