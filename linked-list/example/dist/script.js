@@ -87,6 +87,7 @@ var LinkedList = /** @class */ (function () {
             this.tail = this.tail.next = node;
         }
         this.size++;
+        return this;
     };
     LinkedList.prototype.clear = function () {
         this.head = null;

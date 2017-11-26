@@ -10,7 +10,7 @@ export default class LinkedList<T> {
         this.addToHead(value);
     }
 
-    add(value?: T) {
+    add(value: T): LinkedList<T> {
         if (this.isEmpty) {
             this.addToHead(value);
         } else {
@@ -18,6 +18,8 @@ export default class LinkedList<T> {
             this.tail = this.tail.next = node;
         }
         this.size++;
+
+        return this;
     }
 
     clear() {
