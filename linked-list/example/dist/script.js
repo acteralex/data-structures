@@ -89,6 +89,23 @@ var LinkedList = /** @class */ (function () {
         this._size++;
         return this;
     };
+    LinkedList.prototype.remove = function (value) {
+        if (this.head.value === value) {
+            this.head = this.head.next;
+            this._size--;
+            return this;
+        }
+        var node = this.head;
+        while (node !== null) {
+            if (node.next.value === value) {
+                node.next = node.next.next;
+                this._size--;
+                return this;
+            }
+            node = node.next;
+        }
+        return this;
+    };
     LinkedList.prototype.find = function (value) {
         var node = this.head;
         while (node !== null) {
@@ -168,17 +185,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var linked_list_1 = __webpack_require__(0);
 (function () {
     var linkedList = new linked_list_1.default();
-    console.log(linkedList);
+    console.log('Just was created:', linkedList);
     linkedList.add(100);
     linkedList.add(101);
     linkedList.add(102);
-    console.log(linkedList);
+    console.log('Added 3 items:', linkedList);
+    console.log('Size after added:', linkedList.size);
     linkedList.forEach(function (item, index) {
-        console.log(index, item);
+        console.log('Foreach Item:', index, item);
     });
-    console.log(linkedList.find(101));
+    console.log('Find element:', linkedList.find(101));
     linkedList.clear();
-    console.log(linkedList);
+    console.log('After clear', linkedList);
+    linkedList
+        .add(1)
+        .add(2)
+        .add(3)
+        .add(4);
+    console.log('Added 4 items with chain', linkedList);
+    linkedList.remove(3);
+    console.log('After remove', linkedList);
 })();
 
 

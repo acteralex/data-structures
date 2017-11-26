@@ -23,6 +23,27 @@ export default class LinkedList<T> {
         return this;
     }
 
+    remove(value: T): LinkedList<T> {
+        if(this.head.value === value) {
+            this.head = this.head.next;
+            this._size--;
+            return this;
+        }
+
+        let node = this.head;
+
+        while (node !== null) {
+            if (node.next.value === value) {
+                node.next = node.next.next;
+                this._size--;
+                return this;
+            }
+            node = node.next;
+        }
+
+        return this;
+    }
+
     find(value: T): LinkedListNode<T> {
         let node = this.head;
 

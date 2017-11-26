@@ -89,6 +89,23 @@ var LinkedList = /** @class */ (function () {
         this._size++;
         return this;
     };
+    LinkedList.prototype.remove = function (value) {
+        if (this.head.value === value) {
+            this.head = this.head.next;
+            this._size--;
+            return this;
+        }
+        var node = this.head;
+        while (node !== null) {
+            if (node.next.value === value) {
+                node.next = node.next.next;
+                this._size--;
+                return this;
+            }
+            node = node.next;
+        }
+        return this;
+    };
     LinkedList.prototype.find = function (value) {
         var node = this.head;
         while (node !== null) {
