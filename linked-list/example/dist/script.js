@@ -76,7 +76,6 @@ var LinkedList = /** @class */ (function () {
         this.head = null;
         this.tail = null;
         this._size = 0;
-        var a = 5;
         this.addToHead(value);
     }
     LinkedList.prototype.add = function (value) {
@@ -156,12 +155,12 @@ var LinkedList = /** @class */ (function () {
         configurable: true
     });
     LinkedList.prototype.addToHead = function (value) {
-        if (!this.isNullOrUndefined(value)) {
+        if (!LinkedList.isNullOrUndefined(value)) {
             var node = new linked_list_node_1.default(value);
             this.tail = this.head = node;
         }
     };
-    LinkedList.prototype.isNullOrUndefined = function (value) {
+    LinkedList.isNullOrUndefined = function (value) {
         return value === null || typeof value === 'undefined';
     };
     return LinkedList;

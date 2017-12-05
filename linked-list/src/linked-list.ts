@@ -8,7 +8,6 @@ export default class LinkedList<T> {
     private _size: number = 0;
 
     constructor(value?: T) {
-        const a = 5;
         this.addToHead(value);
     }
 
@@ -95,13 +94,13 @@ export default class LinkedList<T> {
     }
 
     private addToHead(value: T) {
-        if (!this.isNullOrUndefined(value)) {
+        if (!LinkedList.isNullOrUndefined(value)) {
             const node = new LinkedListNode(value);
             this.tail = this.head = node;
         }
     }
 
-    private isNullOrUndefined(value: T): boolean {
+    static isNullOrUndefined(value: any): boolean {
         return value === null || typeof value === 'undefined';
     }
 }
