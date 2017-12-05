@@ -81,6 +81,12 @@ var LinkedList = /** @class */ (function () {
     LinkedList.isNullOrUndefined = function (value) {
         return value === null || typeof value === 'undefined';
     };
+    LinkedList.existValue = function (node, value) {
+        var checkedValue = node && node.value;
+        return Array.isArray(value)
+            ? value.indexOf(checkedValue) !== -1
+            : checkedValue === value;
+    };
     Object.defineProperty(LinkedList.prototype, "isEmpty", {
         get: function () {
             return this._size === 0;
@@ -114,7 +120,7 @@ var LinkedList = /** @class */ (function () {
         return this;
     };
     LinkedList.prototype.remove = function (value, isAll) {
-        while (this.existValue(this.head, value)) {
+        while (LinkedList.existValue(this.head, value)) {
             this.head = this.head.next;
             this._size--;
             if (!isAll) {
@@ -123,7 +129,7 @@ var LinkedList = /** @class */ (function () {
         }
         var node = this.head;
         while (node !== null) {
-            if (this.existValue(node.next, value)) {
+            if (LinkedList.existValue(node.next, value)) {
                 node.next = node.next.next;
                 this._size--;
                 if (!isAll) {
@@ -136,7 +142,7 @@ var LinkedList = /** @class */ (function () {
     };
     LinkedList.prototype.removeRange = function (values, isAll) {
         if (values === void 0) { values = []; }
-        while (this.head && this.existValue(this.head.next, values)) {
+        while (this.head && LinkedList.existValue(this.head.next, values)) {
             this.head = this.head.next;
             this._size--;
             if (!isAll) {
@@ -145,7 +151,7 @@ var LinkedList = /** @class */ (function () {
         }
         var node = this.head;
         while (node !== null) {
-            if (this.existValue(node.next, values)) {
+            if (LinkedList.existValue(node.next, values)) {
                 node.next = node.next.next;
                 this._size--;
                 if (!isAll) {
@@ -178,12 +184,6 @@ var LinkedList = /** @class */ (function () {
         this.head = null;
         this.tail = null;
         this._size = 0;
-    };
-    LinkedList.prototype.existValue = function (node, value) {
-        var checkedValue = node && node.value;
-        return Array.isArray(value)
-            ? value.indexOf(checkedValue) !== -1
-            : checkedValue === value;
     };
     LinkedList.prototype.addToHead = function (value) {
         if (!LinkedList.isNullOrUndefined(value)) {

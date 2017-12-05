@@ -45,7 +45,7 @@ import LinkedList from "../../src/linked-list";
         7,
         3,
         1,
-        8
+        8,
     ]);
 
     console.log('After added range', linkedList);
@@ -53,5 +53,15 @@ import LinkedList from "../../src/linked-list";
     linkedList.remove(3, true);
 
     console.log('After removeAll method', linkedList);
+
+    linkedList.removeRange([
+        5,
+        6,
+        7,
+        1,
+        8,
+    ], true);
+
+    console.log('After removeRange method', linkedList);
 
 })();

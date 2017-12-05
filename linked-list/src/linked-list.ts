@@ -15,6 +15,14 @@ export default class LinkedList<T> {
         return value === null || typeof value === 'undefined';
     }
 
+    static existValue(node: LinkedListNode<any>, value: any | any[]): boolean {
+        const checkedValue = node && node.value;
+
+        return Array.isArray(value)
+            ? value.indexOf(checkedValue) !== -1
+            : checkedValue === value;
+    }
+
     get isEmpty(): boolean {
         return this._size === 0;
     }
@@ -43,7 +51,7 @@ export default class LinkedList<T> {
     }
 
     remove(value: T, isAll?: boolean): LinkedList<T> {
-        while (this.existValue(this.head, value)) {
+        while (LinkedList.existValue(this.head, value)) {
             this.head = this.head.next;
             this._size--;
             if (!isAll) {
@@ -54,7 +62,7 @@ export default class LinkedList<T> {
         let node = this.head;
 
         while (node !== null) {
-            if (this.existValue(node.next, value)) {
+            if (LinkedList.existValue(node.next, value)) {
                 node.next = node.next.next;
                 this._size--;
                 if (!isAll) {
@@ -68,7 +76,7 @@ export default class LinkedList<T> {
     }
 
     removeRange(values: T[] = [], isAll?: boolean): LinkedList<T> {
-        while (this.head && this.existValue(this.head.next, values)) {
+        while (this.head && LinkedList.existValue(this.head.next, values)) {
             this.head = this.head.next;
             this._size--;
             if (!isAll) {
@@ -79,7 +87,7 @@ export default class LinkedList<T> {
         let node = this.head;
 
         while (node !== null) {
-            if (this.existValue(node.next, values)) {
+            if (LinkedList.existValue(node.next, values)) {
                 node.next = node.next.next;
                 this._size--;
                 if (!isAll) {
@@ -120,14 +128,6 @@ export default class LinkedList<T> {
         this.head = null;
         this.tail = null;
         this._size = 0;
-    }
-
-    private existValue(node: LinkedListNode<T>, value: T | T[]): boolean {
-        const checkedValue = node && node.value;
-
-        return Array.isArray(value)
-            ? value.indexOf(checkedValue) !== -1
-            : checkedValue === value;
     }
 
     private addToHead(value: T) {
