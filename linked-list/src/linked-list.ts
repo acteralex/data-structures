@@ -8,6 +8,7 @@ export default class LinkedList<T> {
     private _size: number = 0;
 
     constructor(value?: T) {
+        const a = 5;
         this.addToHead(value);
     }
 
@@ -30,20 +31,24 @@ export default class LinkedList<T> {
         return this;
     }
 
-    remove(value: T): LinkedList<T> {
-        if(this.head.value === value) {
+    remove(value: T, isAll?: boolean): LinkedList<T> {
+        while (this.head && this.head.value === value) {
             this.head = this.head.next;
             this._size--;
-            return this;
+            if (!isAll) {
+                return this;
+            }
         }
 
         let node = this.head;
 
         while (node !== null) {
-            if (node.next.value === value) {
+            if (node.next && node.next.value === value) {
                 node.next = node.next.next;
                 this._size--;
-                return this;
+                if (!isAll) {
+                    return this;
+                }
             }
             node = node.next;
         }

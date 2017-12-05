@@ -25,10 +25,13 @@ import LinkedList from "../../src/linked-list";
     console.log('After clear', linkedList);
 
     linkedList
-        .add(1)
-        .add(2)
         .add(3)
-        .add(4);
+        .add(3)
+        .add(3)
+        .add(3)
+        .add(3)
+        .add(3)
+        .add(3);
 
     console.log('Added 4 items with chain', linkedList);
 
@@ -40,8 +43,15 @@ import LinkedList from "../../src/linked-list";
         5,
         6,
         7,
+        3,
+        1,
+        8
     ]);
 
     console.log('After added range', linkedList);
+
+    linkedList.remove(3, true);
+
+    console.log('After removeAll method', linkedList);
 
 })();

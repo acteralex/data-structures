@@ -76,6 +76,7 @@ var LinkedList = /** @class */ (function () {
         this.head = null;
         this.tail = null;
         this._size = 0;
+        var a = 5;
         this.addToHead(value);
     }
     LinkedList.prototype.add = function (value) {
@@ -96,18 +97,22 @@ var LinkedList = /** @class */ (function () {
         }
         return this;
     };
-    LinkedList.prototype.remove = function (value) {
-        if (this.head.value === value) {
+    LinkedList.prototype.remove = function (value, isAll) {
+        while (this.head && this.head.value === value) {
             this.head = this.head.next;
             this._size--;
-            return this;
+            if (!isAll) {
+                return this;
+            }
         }
         var node = this.head;
         while (node !== null) {
-            if (node.next.value === value) {
+            if (node.next && node.next.value === value) {
                 node.next = node.next.next;
                 this._size--;
-                return this;
+                if (!isAll) {
+                    return this;
+                }
             }
             node = node.next;
         }
@@ -205,10 +210,13 @@ var linked_list_1 = __webpack_require__(0);
     linkedList.clear();
     console.log('After clear', linkedList);
     linkedList
-        .add(1)
-        .add(2)
         .add(3)
-        .add(4);
+        .add(3)
+        .add(3)
+        .add(3)
+        .add(3)
+        .add(3)
+        .add(3);
     console.log('Added 4 items with chain', linkedList);
     linkedList.remove(3);
     console.log('After remove', linkedList);
@@ -216,8 +224,13 @@ var linked_list_1 = __webpack_require__(0);
         5,
         6,
         7,
+        3,
+        1,
+        8
     ]);
     console.log('After added range', linkedList);
+    linkedList.remove(3, true);
+    console.log('After removeAll method', linkedList);
 })();
 
 

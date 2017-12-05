@@ -76,6 +76,7 @@ var LinkedList = /** @class */ (function () {
         this.head = null;
         this.tail = null;
         this._size = 0;
+        var a = 5;
         this.addToHead(value);
     }
     LinkedList.prototype.add = function (value) {
@@ -96,18 +97,22 @@ var LinkedList = /** @class */ (function () {
         }
         return this;
     };
-    LinkedList.prototype.remove = function (value) {
-        if (this.head.value === value) {
+    LinkedList.prototype.remove = function (value, isAll) {
+        while (this.head && this.head.value === value) {
             this.head = this.head.next;
             this._size--;
-            return this;
+            if (!isAll) {
+                return this;
+            }
         }
         var node = this.head;
         while (node !== null) {
-            if (node.next.value === value) {
+            if (node.next && node.next.value === value) {
                 node.next = node.next.next;
                 this._size--;
-                return this;
+                if (!isAll) {
+                    return this;
+                }
             }
             node = node.next;
         }
