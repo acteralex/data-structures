@@ -11,6 +11,18 @@ export default class LinkedList<T> {
         this.addToHead(value);
     }
 
+    static isNullOrUndefined(value: any): boolean {
+        return value === null || typeof value === 'undefined';
+    }
+
+    get isEmpty(): boolean {
+        return this._size === 0;
+    }
+
+    get size(): number {
+        return this._size;
+    }
+
     add(value: T): LinkedList<T> {
         if (this.isEmpty) {
             this.addToHead(value);
@@ -31,7 +43,7 @@ export default class LinkedList<T> {
     }
 
     remove(value: T, isAll?: boolean): LinkedList<T> {
-        while (this.head && this.head.value === value) {
+        while (this.existValue(this.head, value)) {
             this.head = this.head.next;
             this._size--;
             if (!isAll) {
@@ -42,7 +54,32 @@ export default class LinkedList<T> {
         let node = this.head;
 
         while (node !== null) {
-            if (node.next && node.next.value === value) {
+            if (this.existValue(node.next, value)) {
+                node.next = node.next.next;
+                this._size--;
+                if (!isAll) {
+                    return this;
+                }
+            }
+            node = node.next;
+        }
+
+        return this;
+    }
+
+    removeRange(values: T[] = [], isAll?: boolean): LinkedList<T> {
+        while (this.head && this.existValue(this.head.next, values)) {
+            this.head = this.head.next;
+            this._size--;
+            if (!isAll) {
+                return this;
+            }
+        }
+
+        let node = this.head;
+
+        while (node !== null) {
+            if (this.existValue(node.next, values)) {
                 node.next = node.next.next;
                 this._size--;
                 if (!isAll) {
@@ -85,12 +122,12 @@ export default class LinkedList<T> {
         this._size = 0;
     }
 
-    get isEmpty(): boolean {
-        return this._size === 0;
-    }
+    private existValue(node: LinkedListNode<T>, value: T | T[]): boolean {
+        const checkedValue = node && node.value;
 
-    get size(): number {
-        return this._size;
+        return Array.isArray(value)
+            ? value.indexOf(checkedValue) !== -1
+            : checkedValue === value;
     }
 
     private addToHead(value: T) {
@@ -98,9 +135,5 @@ export default class LinkedList<T> {
             const node = new LinkedListNode(value);
             this.tail = this.head = node;
         }
-    }
-
-    static isNullOrUndefined(value: any): boolean {
-        return value === null || typeof value === 'undefined';
     }
 }

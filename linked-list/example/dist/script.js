@@ -78,6 +78,23 @@ var LinkedList = /** @class */ (function () {
         this._size = 0;
         this.addToHead(value);
     }
+    LinkedList.isNullOrUndefined = function (value) {
+        return value === null || typeof value === 'undefined';
+    };
+    Object.defineProperty(LinkedList.prototype, "isEmpty", {
+        get: function () {
+            return this._size === 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LinkedList.prototype, "size", {
+        get: function () {
+            return this._size;
+        },
+        enumerable: true,
+        configurable: true
+    });
     LinkedList.prototype.add = function (value) {
         if (this.isEmpty) {
             this.addToHead(value);
@@ -97,7 +114,7 @@ var LinkedList = /** @class */ (function () {
         return this;
     };
     LinkedList.prototype.remove = function (value, isAll) {
-        while (this.head && this.head.value === value) {
+        while (this.existValue(this.head, value)) {
             this.head = this.head.next;
             this._size--;
             if (!isAll) {
@@ -106,7 +123,29 @@ var LinkedList = /** @class */ (function () {
         }
         var node = this.head;
         while (node !== null) {
-            if (node.next && node.next.value === value) {
+            if (this.existValue(node.next, value)) {
+                node.next = node.next.next;
+                this._size--;
+                if (!isAll) {
+                    return this;
+                }
+            }
+            node = node.next;
+        }
+        return this;
+    };
+    LinkedList.prototype.removeRange = function (values, isAll) {
+        if (values === void 0) { values = []; }
+        while (this.head && this.existValue(this.head.next, values)) {
+            this.head = this.head.next;
+            this._size--;
+            if (!isAll) {
+                return this;
+            }
+        }
+        var node = this.head;
+        while (node !== null) {
+            if (this.existValue(node.next, values)) {
                 node.next = node.next.next;
                 this._size--;
                 if (!isAll) {
@@ -140,28 +179,17 @@ var LinkedList = /** @class */ (function () {
         this.tail = null;
         this._size = 0;
     };
-    Object.defineProperty(LinkedList.prototype, "isEmpty", {
-        get: function () {
-            return this._size === 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(LinkedList.prototype, "size", {
-        get: function () {
-            return this._size;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    LinkedList.prototype.existValue = function (node, value) {
+        var checkedValue = node && node.value;
+        return Array.isArray(value)
+            ? value.indexOf(checkedValue) !== -1
+            : checkedValue === value;
+    };
     LinkedList.prototype.addToHead = function (value) {
         if (!LinkedList.isNullOrUndefined(value)) {
             var node = new linked_list_node_1.default(value);
             this.tail = this.head = node;
         }
-    };
-    LinkedList.isNullOrUndefined = function (value) {
-        return value === null || typeof value === 'undefined';
     };
     return LinkedList;
 }());
